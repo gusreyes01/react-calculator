@@ -4,6 +4,10 @@ A simple calculator using React.
 
 <hr>
 
+## Demo
+
+## View example on [react-calculator-9002.surge.sh](https://react-calculator-9002.surge.sh)
+
 ## How to run this project
 
 ```sh
@@ -11,6 +15,14 @@ $ cd react-calculator
 $ npm install 
 $ npm start 
 ```
+
+## How to test this project
+
+```sh
+$ cd react-calculator
+$ npm test 
+```
+
 
 ## Contributing
 
