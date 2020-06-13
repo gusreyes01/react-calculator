@@ -9,7 +9,34 @@ function CalculatorKeyboard() {
 
   return (
     <div className="CalculatorKeyboard">
-        <CalculatorKey onClick={onClick} value="Test"></CalculatorKey>
+        <div>
+          <CalculatorKey onClick={onClick} value="AC"></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="%"></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="÷"></CalculatorKey>
+        </div>
+        <div>
+          <CalculatorKey onClick={onClick} value="7"></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="8"></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="9"></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="×"></CalculatorKey>
+        </div>
+        <div>
+          <CalculatorKey onClick={onClick} value="4"></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="5"></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="6"></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="−"></CalculatorKey>
+        </div>
+        <div>
+          <CalculatorKey onClick={onClick} value="1"></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="2"></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="3"></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="+"></CalculatorKey>
+        </div>
+        <div>
+          <CalculatorKey onClick={onClick} value="0"></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="."></CalculatorKey>
+          <CalculatorKey onClick={onClick} value="="></CalculatorKey>
+        </div>
     </div>
   );
 }
