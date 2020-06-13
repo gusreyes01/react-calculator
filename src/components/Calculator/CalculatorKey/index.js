@@ -12,7 +12,7 @@ const CalculatorKey = (props) => {
 
   return (
     <div className="CalculatorKey">
-      <button onClick={_onClick}>{props.value}</button>
+      <div onClick={_onClick}>{props.value}</div>
     </div>
   );
 }

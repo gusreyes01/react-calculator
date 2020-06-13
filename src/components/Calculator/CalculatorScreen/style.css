@@ -1,0 +1,7 @@
+.CalculatorScreen {
+  text-align: right;
+  color: white;
+  font-size: 5vw;
+  margin: 5;
+  flex: 1;
+}

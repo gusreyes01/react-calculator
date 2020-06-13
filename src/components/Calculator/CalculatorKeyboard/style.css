@@ -1,5 +1,12 @@
 .CalculatorKeyboard {
     background-color: red;
     display: flex;
+    flex-direction: column;
+    flex: 4;
+  }
+
+  .CalculatorKeyboard__row {
+    display: flex;
     flex-direction: row;
   }
+
