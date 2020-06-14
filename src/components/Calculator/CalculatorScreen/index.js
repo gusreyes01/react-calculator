@@ -1,10 +1,10 @@
 import React from 'react';
 import './style.css';
 
-function CalculatorScreen() {
+function CalculatorScreen(props) {
   return (
     <div className="CalculatorScreen">
-      <div>0</div>
+      <div>{props.obj.total}</div>
     </div>
   );
 }
