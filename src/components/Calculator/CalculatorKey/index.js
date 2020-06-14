@@ -11,8 +11,8 @@ const CalculatorKey = (props) => {
   }
 
   return (
-    <div className="CalculatorKey">
-      <button onClick={_onClick}>{props.value}</button>
+    <div className="CalculatorKey" onClick={_onClick}>
+      <div>{props.value}</div>
     </div>
   );
 }
