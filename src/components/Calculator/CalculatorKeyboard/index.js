@@ -1,9 +1,8 @@
 import React from 'react';
 import './style.css';
 import CalculatorKey from '../CalculatorKey'
+
 function CalculatorKeyboard(props) {
-
-
 
   return (
     <div className="CalculatorKeyboard">

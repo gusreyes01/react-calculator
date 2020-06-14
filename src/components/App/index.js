@@ -7,14 +7,10 @@ import Operation from '../operations';
 function App() {
   const [obj, setObj] = useState({total: 0, newVal: null, operand: null});
 
-
   const onClick = (val) => {
-
-    console.log(Operation(obj))
     obj.newVal = val
     setObj(obj => Operation(obj))
   }
-
 
   return (
     <div className="App">
