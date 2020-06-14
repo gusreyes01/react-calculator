@@ -1,6 +1,10 @@
 .CalculatorKey {
-    background-color: yellow;
+    background-color: gray;
+    color: white;
     margin: 1px;
+    font-size: 12vw;
     flex: 1;
-    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
    }

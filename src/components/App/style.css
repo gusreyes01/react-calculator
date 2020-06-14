@@ -1,5 +1,8 @@
 .App {
-  background-color: blue;
+  background-color: purple;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  flex-wrap: wrap;
+  height: 100%;
 }

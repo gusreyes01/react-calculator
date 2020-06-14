@@ -4,7 +4,7 @@ import './style.css';
 function CalculatorScreen() {
   return (
     <div className="CalculatorScreen">
-      Screen
+      <div>0</div>
     </div>
   );
 }

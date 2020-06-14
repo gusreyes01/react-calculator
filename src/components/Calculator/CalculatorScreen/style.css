@@ -1,7 +1,13 @@
 .CalculatorScreen {
-  text-align: right;
+  background-color: black;
+  flex: 1;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 2vh;
   color: white;
-  font-size: 5vw;
+  font-size: 10vh;
   margin: 5;
   flex: 1;
 }
