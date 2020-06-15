@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.css';
 import CalculatorKey from '../CalculatorKey'
+import PropTypes from "prop-types";
 
 function CalculatorKeyboard(props) {
 
@@ -37,5 +38,16 @@ function CalculatorKeyboard(props) {
     </div>
   );
 }
+
+CalculatorKeyboard.propTypes = {
+  value: PropTypes.string.isRequired,
+  onClick: PropTypes.func
+}
+
+// Set defaultProps
+CalculatorKeyboard.defaultProps = {
+  value: "X",
+  onClick: null
+};
 
 export default CalculatorKeyboard;

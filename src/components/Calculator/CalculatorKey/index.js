@@ -2,11 +2,9 @@ import React from 'react';
 import './style.css';
 import PropTypes from "prop-types";
 
-
-
-const CalculatorKey = (props) => {
+function CalculatorKey(props) {
  
-  const _onClick = () => { // use consts or let
+  const _onClick = () => { 
     props.onClick(props.value)
   }
 

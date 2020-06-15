@@ -4,116 +4,148 @@
  * We'll use this component to encapsulate all the calculator operations. 
  * It will receive an object with the following attributes:
  * 
- * operand - type of operation we'll execute
- * newVal  - new value that we'll calculate against the total
- * total   - this is the current total value
+ * userTotal   - this is the current total value (displayed)
+ * calcTotal   - internal operation we're running (before it's displayed)
+ * operand     - operand expecting to be executed
+ * newVal      - new value that we'll calculate against the total
+ *
  * 
 ***/
 
 const Operation = (obj) => {
 
-    let _division = (obj) => {
-        let total = obj.total / obj.newVal
+    const _division = (obj) => {
+        let total = obj.userTotal / obj.newVal
         return {
-            total: total,
-            operand: null,
+            userTotal: total,
+            calcTotal: null,
             newVal: null,
         }
     }
 
-    let _muliplication = (obj) => {
-        let total = obj.total * obj.newVal
+    const _muliplication = (obj) => {
+        let total = obj.userTotal * obj.newVal
         return {
-            total: total,
-            operand: null,
+            userTotal: total,
+            calcTotal: null,
             newVal: null,
         }
     }
 
-    let _addition = (obj) => {
-        let total = obj.total + obj.newVal
+    const _addition = (obj) => {
+        let operand =  obj.newVal
+        let total = obj.userTotal
         return {
-            total: total,
-            operand: null,
+            userTotal: total,
+            calcTotal: operand,
             newVal: null,
         }
     }
 
-    let _substract = (ob) => {
-        let total = obj.total - obj.newVal
+    const _substract = (ob) => {
+        let total = obj.userTotal - obj.newVal
         return {
-            total: total,
-            operand: null,
+            userTotal: total,
+            calcTotal: null,
             newVal: null,
         }
     }
 
-    let _decimal = (obj) => {
-        let total = obj.total + '.' 
+    const _decimal = (obj) => {
+        let total = obj.userTotal + '.' 
         return {
-            total: total,
-            operand: null,
+            userTotal: total,
+            calcTotal: null,
             newVal: null,
         }
     }
 
-    let _percent = (obj) => {
-        let total = obj.total / 100
+    const _percent = (obj) => {
+        let total = obj.userTotal / 100
         return {
-            total: total,
-            operand: null,
-            newVal: null,
-        }
-    }
-
-    let _equal = (obj) => {
-        let total = obj.total = obj.newVal
-        return {
-            total: total,
-            operand: null,
+            userTotal: total,
+            calcTotal: null,
             newVal: null,
         }
     }
     
-    let _clear = (obj) => {
-        let total = obj.total + '.' 
+    const _clear = (obj) => {
+        let total = 0 
         return {
-            total: total,
-            operand: null,
+            userTotal: total,
+            calcTotal: null,
             newVal: null,
         }
     }
 
-    let calculate = (obj) => {
+    const _eval = (obj) => {
+        let total = obj.calcTotal;
+        return {
+            userTotal: total,
+            calcTotal: obj.calcTotal,
+            newVal: null,
+        }
+    }
 
+    const _isOperand = (val) => {
+        const operands = ['×','−','']
+        const isOperand = operands.includes(val);
+        return isOperand
+    }
+
+    const operandSwitch = (obj, symbol) => {
+        switch(symbol){
+            case '=':
+                return _eval(obj)
+            case '.':
+                return _decimal(obj)
+            case '%':
+                return _percent(obj)
+            case '÷':
+                return _division(obj)
+            case '×':
+                return _muliplication(obj)
+            case '−':
+                return _substract(obj)
+            case '+':
+                return _addition(obj)
+            default:
+                return _clear(obj)
+        }
+    }
+
+    const calculate = (obj) => {
+        let total;
+
+        // Validate if pressed key is a symbol or number
         if (isNaN(obj.newVal)) {
-            switch(obj.newVal){
-                case 'AC':
-                    return _clear(obj)
-                case '.':
-                    return _decimal(obj)
-                case '%':
-                    return _percent(obj)
-                case '÷':
-                    return _division(obj)
-                case '×':
-                    return _muliplication(obj)
-                case '−':
-                    return _substract(obj)
-                case '+':
-                    return _addition(obj)
-                case '=':
-                    return _equal(obj)
-                default:
-                    return _clear(obj)
+            // Validate if pressed symbol is an operand
+            if(_isOperand(obj.newVal)){
+                // Set operand as active
+                obj.operand = obj.newVal
+                alert(JSON.stringify(obj))
+                return obj
+            }else{
+                return operandSwitch(obj, obj.newVal)
             }
-             
-
+            
         }else{
-            return {total: obj.total + obj.newVal, 
-                    operand: obj.operand,
-                    newVal: null
-                }
+            // Validate if ignore
+            if(obj.userTotal == "0"){
+                total = obj.newVal
+            // Execute operand
+            } else if(obj.operand){
+                return operandSwitch(obj, obj.operand)
+            }
+            // Append number
+            else {
+                total = obj.userTotal + obj.newVal
+            }
+            return {userTotal: total, 
+                    calcTotal: total,
+                    newVal: null,
+                    operand: obj.operand
+                    }
         }
     }
 
