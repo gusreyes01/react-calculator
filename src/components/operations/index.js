@@ -4,60 +4,57 @@
  * We'll use this component to encapsulate all the calculator operations. 
  * It will receive an object with the following attributes:
  * 
- * userTotal   - this is the current total value (displayed)
- * calcTotal   - internal operation we're running (before it's displayed)
- * operand     - operand expecting to be executed
- * newVal      - new value that we'll calculate against the total
- *
+ * userTotal    - this is the current total value (displayed)
+ * calcTotal    - internal operation we're running (before it's displayed)
+ * operand      - operand expecting to be executed
+ * curVal       - current value that we'll calculate against the total
  * 
 ***/
 
 const Operation = (obj) => {
 
     const _division = (obj) => {
-        if(obj.newVal === "0"){
+        if(obj.curVal === "0"){
             alert("Cannot divide by 0")
         }
-        let newVal = parseFloat(obj.newVal)
-        let total = parseFloat(obj.userTotal) / parseFloat(obj.newVal)
+        let total = parseFloat(obj.userTotal) / parseFloat(obj.calcTotal)
+        total = Math.round(total * 10000) / 10000
         return {
-            userTotal: newVal,
-            calcTotal: total,
-            newVal: null,
-            operand: null,
+            userTotal: total,
+            calcTotal: null,
+            curVal: null,
+            operand: obj.operand,
         }
     }
 
     const _muliplication = (obj) => {
-        let newVal = parseFloat(obj.newVal)
-        let total = parseFloat(obj.userTotal) * parseFloat(obj.newVal)
+        let total = parseFloat(obj.userTotal) * parseFloat(obj.calcTotal)
+        console.log(obj)
         return {
-            userTotal: newVal,
-            calcTotal: total,
-            newVal: null,
-            operand: null,
+            userTotal: total,
+            calcTotal: null,
+            curVal: null,
+            operand: obj.operand,
         }
     }
 
     const _addition = (obj) => {
-        let newVal = parseFloat(obj.newVal)
-        let total = parseFloat(obj.userTotal) + parseFloat(obj.newVal)
+        let total = parseFloat(obj.userTotal) + parseFloat(obj.calcTotal)
         return {
-            userTotal: newVal,
-            calcTotal: total,
-            newVal: null,
-            operand: null,
+            userTotal: total,
+            calcTotal: null,
+            curVal: null,
+            operand: obj.operand,
         }
     }
 
     const _substract = (ob) => {
-        let newVal = parseFloat(obj.newVal)
-        let total = parseFloat(obj.userTotal) - parseFloat(obj.newVal)
+        let total = parseFloat(obj.userTotal) - parseFloat(obj.calcTotal)
         return {
-            userTotal: newVal,
-            calcTotal: total,
-            newVal: null,
-            operand: null,
+            userTotal: total,
+            calcTotal: null,
+            curVal: null,
+            operand: obj.operand,
         }
     }
 
@@ -66,7 +63,7 @@ const Operation = (obj) => {
         return {
             userTotal: total,
             calcTotal: null,
-            newVal: null,
+            curVal: null,
             operand: null,
         }
     }
@@ -76,7 +73,7 @@ const Operation = (obj) => {
         return {
             userTotal: total,
             calcTotal: null,
-            newVal: null,
+            curVal: null,
             operand: null,
         }
     }
@@ -86,22 +83,23 @@ const Operation = (obj) => {
         return {
             userTotal: total,
             calcTotal: null,
-            newVal: null,
+            curVal: null,
             operand: null,
         }
     }
 
     const _eval = (obj) => {
-        let total = obj.userTotal
-        if(obj.calcTotal){
-             total = obj.calcTotal;
-        }
-        return {
-            userTotal: total,
-            calcTotal: null,
-            newVal: null,
-            operand: null,
-        }
+        // let total = obj.userTotal
+        // if(obj.calcTotal){
+        //      total = obj.calcTotal;
+        // }
+        // return {
+        //     userTotal: total,
+        //     calcTotal: null,
+        //     curVal: null,
+        //     operand: null,
+        // }
+        return operandSwitch(obj, obj.operand)
     }
 
     const _isOperand = (val) => {
@@ -132,49 +130,59 @@ const Operation = (obj) => {
         }
     }
 
-    const calculate = (obj) => {
-        let total;
-
+    const _calculate = (obj) => {
+        let total, operand, calcTotal;
         // Validate if pressed key is a symbol or number
-        if (isNaN(obj.newVal)) {
+        if (isNaN(obj.curVal)) {
             // Validate if pressed symbol is an operand
-            if(_isOperand(obj.newVal)){
+            if(_isOperand(obj.curVal)){
                 // Set operand as active
-                obj.operand = obj.newVal
-                
-                if(obj.calcTotal){
-                    // If a calculation is ongoing, display it 
-                    return {
-                        userTotal:  obj.calcTotal, 
-                        calcTotal: obj.calcTotal,
-                        newVal: null,
-                        operand: obj.operand
-                    }
+                if(obj.operand){
+                    return operandSwitch(obj, obj.curVal)
+                }else{
+                    // Set operand as active
+                    operand = obj.curVal
                 }
-                return obj
+
+                // If a calculation is ongoing, display it 
+                return {
+                    userTotal: obj.calcTotal, 
+                    calcTotal: null,
+                    curVal: null,
+                    operand: operand
+                }
             }else{
-                return operandSwitch(obj, obj.newVal)
+                return operandSwitch(obj, obj.curVal)
             }
         }else{
-            // Validate if ignore 
-            if(obj.userTotal === 0){
-                total = obj.newVal
-            } else if(obj.operand){
-            // Execute operand
-                return operandSwitch(obj, obj.operand)
-            }else {
-            // Append number
-                total = obj.userTotal + obj.newVal
-            }
-            return {userTotal: total, 
-                    calcTotal: total,
-                    newVal: null,
-                    operand: obj.operand
-                    }
-        }
-    }
 
-    return calculate(obj)
+            // Validate if we should ignore 
+            if(obj.userTotal === 0){
+                total = obj.curVal
+                return { calcTotal: total }
+            } else if(obj.operand){
+                    if (obj.calcTotal) {
+                        calcTotal =  obj.calcTotal + obj.curVal
+                        return { calcTotal, userTotal: obj.userTotal, operand: obj.operand}
+                    }else {
+                        calcTotal = obj.curVal
+                        return { calcTotal, userTotal: obj.userTotal,  operand: obj.operand}
+                    }
+                
+            }else{
+               
+                if (obj.calcTotal) {
+                    calcTotal = obj.calcTotal + obj.curVal
+                }else {
+                    calcTotal =  obj.curVal}
+                return {calcTotal: calcTotal}
+                    
+                }
+            }
+        }
+    
+
+    return {calculate: _calculate(obj)}
  
 }
 

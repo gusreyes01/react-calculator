@@ -4,7 +4,7 @@ import './style.css';
 function CalculatorScreen(props) {
   return (
     <div className="CalculatorScreen">
-      <div>{props.obj.userTotal}</div>
+      <div> { props.obj.calcTotal  || props.obj.userTotal  || 0 }</div>
     </div>
   );
 }
