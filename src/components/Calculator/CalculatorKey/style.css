@@ -1,16 +1,37 @@
 .CalculatorKey {
-    background-color: gray;
+    background-color: rgb(110, 110, 110);
     color: white;
     margin: 1px;
     font-size: 12vw;
     flex: 1;
     align-items: center;
+    border-radius: 0.2vw;
     display: flex;
     justify-content: center;
    }
 
+.CalculatorKey.fr {
+  background-color: rgb(58, 58, 56);
+}
+
+.CalculatorKey.og {
+  background-color: orange;
+}
+
+.CalculatorKey.flx-2 {
+  flex: 2;
+}
+
+.CalculatorKey.flx-15 {
+  flex: 1.50;
+}
+
+.CalculatorKey.flx-1 {
+  flex: 1;
+}
+
 .CalculatorKey:active {
-  background-color: gray;
+  background-color: rgb(48, 48, 48);
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
