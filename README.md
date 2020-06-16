@@ -2,9 +2,9 @@
 
 A simple calculator using React.
 
-<hr>
+[![Build Status](https://travis-ci.com/gusreyes01/react-calculator.svg?branch=master)](https://travis-ci.com/gusreyes01/react-calculator)
 
-## Demo
+<hr>
 
 ## View example on [react-calculator-9002.surge.sh](https://react-calculator-9002.surge.sh)
 
