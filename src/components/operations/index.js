@@ -15,6 +15,9 @@
 const Operation = (obj) => {
 
     const _division = (obj) => {
+        if(obj.newVal === "0"){
+            alert("Cannot divide by 0")
+        }
         let newVal = parseFloat(obj.newVal)
         let total = parseFloat(obj.userTotal) / parseFloat(obj.newVal)
         return {
