@@ -23,11 +23,12 @@ test('test percent', () => {
     });
   });
 
-  test('test addition', () => {
-    let obj = {userTotal: '800', calcTotal: null, newVal: '%'}
+
+  test('test decimal', () => {
+    let obj = {userTotal: '2', calcTotal: null, newVal: '.'}
     obj = Operation(obj)
     expect(obj).toEqual({
-      userTotal: 8,
+      userTotal: "2.",
       calcTotal: null,
       newVal: null,
       operand: null,
@@ -35,11 +36,11 @@ test('test percent', () => {
   });
 
   test('test substraction', () => {
-    let obj = {userTotal: '4', calcTotal: '4', newVal: '2', operand: '-'}
+    let obj = {userTotal: '8', calcTotal: '8', newVal: '2', operand: '−'}
     obj = Operation(obj)
     expect(obj).toEqual({
       userTotal: 2,
-      calcTotal: 2,
+      calcTotal: 6,
       newVal: null,
       operand: null,
     });
@@ -67,14 +68,15 @@ test('test percent', () => {
     });
   });
 
-
   test('test division', () => {
-    let obj = {userTotal: '2', calcTotal: '2', newVal: '2', operand: '+'}
+    let obj = {userTotal: '2', calcTotal: '2', newVal: '2', operand: '÷'}
     obj = Operation(obj)
     expect(obj).toEqual({
-      userTotal: 4,
-      calcTotal: null,
+      userTotal: 2,
+      calcTotal: 1,
       newVal: null,
       operand: null,
     });
   });
+
+ 

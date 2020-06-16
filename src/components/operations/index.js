@@ -61,8 +61,8 @@ const Operation = (obj) => {
     const _decimal = (obj) => {
         let total = obj.userTotal + '.' 
         return {
-            userTotal: obj.newVal,
-            calcTotal: total,
+            userTotal: total,
+            calcTotal: null,
             newVal: null,
             operand: null,
         }
