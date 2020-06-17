@@ -109,7 +109,6 @@ const Operation = (obj) => {
     }
 
     const _eval = (obj) => {  
-        console.log(obj)
         let total = obj.userTotal;
         if(obj.calcVal){
             total = obj.calcVal;
@@ -157,7 +156,7 @@ const Operation = (obj) => {
     }
 
     const _calculate = (obj) => {
-        let total, operand, calcVal;
+        let operand, calcVal;
         // Validate if pressed key is a symbol or number
         if (isNaN(obj.curVal)) {
             // Validate if pressed symbol is an operand
@@ -198,7 +197,6 @@ const Operation = (obj) => {
             // Validate if we should ignore zero
             if( (!(obj.calcVal) || obj.calcVal === 0) && obj.curVal === "0" ){
                 obj.calcVal = 0
-                console.log(obj)
                 return obj
             } else if(obj.operand){
                     if (obj.calcVal) {
