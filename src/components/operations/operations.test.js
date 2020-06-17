@@ -13,7 +13,7 @@ test('test equals', () => {
 });
 
 test('test percent', () => {
-    let obj = {userTotal: '800', calcVal: null, operand: '%', curVal: '='}
+    let obj = {userTotal: '800', calcVal: null, operand: null, curVal: '%'}
     obj = Operation(obj).calculate
     expect(obj).toEqual({
       userTotal: 8,
