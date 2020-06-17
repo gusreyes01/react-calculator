@@ -2,79 +2,79 @@ import Operation from './index.js';
 import expect from 'expect';
 
 test('test equals', () => {
-  let obj = {userTotal: '2', calcTotal: '4', newVal: '='}
-  obj = Operation(obj)
+  let obj = {userTotal: '4', curVal: '='}
+  obj = Operation(obj).calculate
   expect(obj).toEqual({
     userTotal: '4',
-    calcTotal: null,
-    newVal: null,
+    calcVal: null,
+    curVal: null,
     operand: null,
   });
 });
 
 test('test percent', () => {
-    let obj = {userTotal: '800', calcTotal: null, newVal: '%'}
-    obj = Operation(obj)
+    let obj = {userTotal: '800', calcVal: null, operand: '%', curVal: '='}
+    obj = Operation(obj).calculate
     expect(obj).toEqual({
       userTotal: 8,
-      calcTotal: null,
-      newVal: null,
+      calcVal: null,
+      curVal: null,
       operand: null,
     });
   });
 
 
   test('test decimal', () => {
-    let obj = {userTotal: '2', calcTotal: null, newVal: '.'}
-    obj = Operation(obj)
+    let obj = {userTotal: null, calcVal: '2', operand: null, curVal: '.' }
+    obj = Operation(obj).calculate
     expect(obj).toEqual({
-      userTotal: "2.",
-      calcTotal: null,
-      newVal: null,
+      userTotal: null,
+      calcVal: "2.",
+      curVal: null,
       operand: null,
     });
   });
 
   test('test substraction', () => {
-    let obj = {userTotal: '8', calcTotal: '8', newVal: '2', operand: '−'}
-    obj = Operation(obj)
+    let obj = {userTotal: '8', calcVal: '8', operand: '−', curVal: '='}
+    obj = Operation(obj).calculate
     expect(obj).toEqual({
-      userTotal: 2,
-      calcTotal: 6,
-      newVal: null,
+      userTotal: 0,
+      calcVal: null,
+      curVal: null,
       operand: null,
     });
   });
 
   test('test addition', () => {
-    let obj = {userTotal: '2', calcTotal: '2', newVal: '2', operand: '+'}
-    obj = Operation(obj)
+    let obj = {userTotal: '2', calcVal: '2', operand: '+', curVal: '='}
+    obj = Operation(obj).calculate
     expect(obj).toEqual({
-      userTotal: 2,
-      calcTotal: 4,
-      newVal: null,
+      userTotal: 4,
+      calcVal: null,
+      curVal: null,
       operand: null,
     });
   });
 
-  test('test mupltiplication', () => {
-    let obj = {userTotal: '4', calcTotal: '4', newVal: '2', operand: '×'}
-    obj = Operation(obj)
+  test('test multiplication', () => {
+    let obj = {userTotal: '4', calcVal: '4', operand: '×', curVal: '='}
+    obj = Operation(obj).calculate
     expect(obj).toEqual({
-      userTotal: 2,
-      calcTotal: 8,
-      newVal: null,
+      userTotal: 16,
+      calcVal: null,
+      curVal: null,
       operand: null,
     });
   });
 
   test('test division', () => {
-    let obj = {userTotal: '2', calcTotal: '2', newVal: '2', operand: '÷'}
-    obj = Operation(obj)
+    let obj = {userTotal: '2', calcVal: '2',operand: '÷',  curVal: '='}
+    obj = Operation(obj).calculate
     expect(obj).toEqual({
-      userTotal: 2,
-      calcTotal: 1,
-      newVal: null,
+      userTotal: 1,
+      calcVal: null,
+      curVal: null,
       operand: null,
     });
   });

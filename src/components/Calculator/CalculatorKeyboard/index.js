@@ -40,13 +40,11 @@ function CalculatorKeyboard(props) {
 }
 
 CalculatorKeyboard.propTypes = {
-  value: PropTypes.string.isRequired,
   onClick: PropTypes.func
 }
 
 // Set defaultProps
 CalculatorKeyboard.defaultProps = {
-  value: "X",
   onClick: null
 };
 
