@@ -1,6 +1,7 @@
 /*** 
  * 
  * operations/index.js
+ * 
  * We'll use this component to encapsulate all the calculator operations. 
  * It will receive an object with the following attributes:
  * 
@@ -67,7 +68,11 @@ const Operation = (obj) => {
 
     const _decimal = (obj) => {
         let calcVal = obj.calcVal;
-  
+        
+        if((calcVal === 0 || !(calcVal))){
+            calcVal = "0."
+        }
+
         if(calcVal && calcVal.indexOf(".") === -1){
             calcVal = calcVal + '.';
         }
@@ -189,10 +194,9 @@ const Operation = (obj) => {
                 return operandSwitch(obj, obj.curVal);             
             }
         }else{
-            // Validate if we should ignore 
-            if(obj.userTotal === 0){
-                total = obj.curVal;
-                return { calcVal: total }
+            // Validate if we should ignore zero
+            if( (!(obj.calcVal) || obj.calcVal === 0) && obj.curVal === "0" ){
+                return { calcVal: null }
             } else if(obj.operand){
                     if (obj.calcVal) {
                         calcVal =  obj.calcVal + obj.curVal;
