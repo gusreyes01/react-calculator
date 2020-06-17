@@ -89,7 +89,7 @@ const Operation = (obj) => {
             userTotal: total,
             calcVal: null,
             curVal: null,
-            operand: null,
+            operand: obj.operand,
         }
     }
     
