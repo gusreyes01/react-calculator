@@ -109,6 +109,7 @@ const Operation = (obj) => {
     }
 
     const _eval = (obj) => {  
+        console.log(obj)
         let total = obj.userTotal;
         if(obj.calcVal){
             total = obj.calcVal;
@@ -196,7 +197,9 @@ const Operation = (obj) => {
         }else{
             // Validate if we should ignore zero
             if( (!(obj.calcVal) || obj.calcVal === 0) && obj.curVal === "0" ){
-                return { calcVal: null }
+                obj.calcVal = 0
+                console.log(obj)
+                return obj
             } else if(obj.operand){
                     if (obj.calcVal) {
                         calcVal =  obj.calcVal + obj.curVal;
