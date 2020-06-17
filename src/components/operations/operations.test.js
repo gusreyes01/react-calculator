@@ -25,11 +25,11 @@ test('test percent', () => {
 
 
   test('test decimal', () => {
-    let obj = {userTotal: '2', calcVal: null, operand: '.', curVal: '=' }
+    let obj = {userTotal: null, calcVal: '2', operand: null, curVal: '.' }
     obj = Operation(obj).calculate
     expect(obj).toEqual({
-      userTotal: "2.",
-      calcVal: null,
+      userTotal: null,
+      calcVal: "2.",
       curVal: null,
       operand: null,
     });
