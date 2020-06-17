@@ -5,7 +5,7 @@ import CalculatorScreen from '../Calculator/CalculatorScreen';
 import Operation from '../operations';
 
 function App() {
-  let [obj, setObj] = useState({userTotal: 0, calcTotal: null, curVal: null, operand: null});
+  let [obj, setObj] = useState({userTotal: 0, calcVal: null, curVal: null, operand: null});
 
   const onClick = (val) => {
     obj.curVal = val
