@@ -9,7 +9,7 @@ function CalculatorKey(props) {
   }
 
   return (
-    <div className={"CalculatorKey "+ props.className} onClick={_onClick}>
+    <div className={"CalculatorKey "+ (props.className || "")} onClick={_onClick}>
       <div>{props.value}</div>
     </div>
   );
@@ -18,14 +18,14 @@ function CalculatorKey(props) {
 CalculatorKey.propTypes = {
   value: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-  class: PropTypes.string,
+  className: PropTypes.string,
 }
 
 // Set defaultProps
 CalculatorKey.defaultProps = {
   value: "X",
   onClick: null,
-  class: null,
+  className: "",
 };
 
 export default CalculatorKey;

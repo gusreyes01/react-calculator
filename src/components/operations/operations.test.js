@@ -79,4 +79,37 @@ test('test percent', () => {
     });
   });
 
- 
+  test('division by zero returns a controlled error state', () => {
+    const obj = Operation({
+      userTotal: '8',
+      calcVal: '0',
+      operand: '÷',
+      curVal: '='
+    }).calculate;
+
+    expect(obj).toEqual({
+      userTotal: 'Error',
+      calcVal: null,
+      curVal: null,
+      operand: null,
+    });
+  });
+
+  test('invalid arithmetic input returns a controlled error state', () => {
+    const obj = Operation({
+      userTotal: 'not-a-number',
+      calcVal: '2',
+      operand: '+',
+      curVal: '='
+    }).calculate;
+
+    expect(obj.userTotal).toEqual('Error');
+  });
+
+  test('setting an operand does not mutate the input state', () => {
+    const state = { userTotal: '8', calcVal: null, operand: null, curVal: '+' };
+    const result = Operation(state).calculate;
+
+    expect(state.operand).toEqual(null);
+    expect(result.operand).toEqual('+');
+  });

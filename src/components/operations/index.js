@@ -18,52 +18,33 @@ const Operation = (obj) => {
         return Math.round(val * 1000000) / 1000000;
     }
 
-    const _division = (obj) => {
-        if(obj.curVal === "0"){
-            alert("Cannot divide by 0")
+    const _result = (userTotal) => ({
+        userTotal,
+        calcVal: null,
+        curVal: null,
+        operand: null,
+    });
+
+    const _applyArithmetic = (state, symbol) => {
+        const left = parseFloat(state.userTotal);
+        const right = parseFloat(state.calcVal);
+
+        if (!Number.isFinite(left) || !Number.isFinite(right)) {
+            return _result("Error");
         }
 
-        let total = parseFloat(obj.userTotal) / parseFloat(obj.calcVal);
-        total = _roundNumber(total);
-        return {
-            userTotal: total,
-            calcVal: null,
-            curVal: null,
-            operand: null,
+        if (symbol === '÷' && right === 0) {
+            return _result("Error");
         }
-    }
 
-    const _muliplication = (obj) => {
-        let total = parseFloat(obj.userTotal) * parseFloat(obj.calcVal);
-        total =_roundNumber(total);
-        return {
-            userTotal: total,
-            calcVal: null,
-            curVal: null,
-            operand: null,
-        }
-    }
+        const operations = {
+            '+': (a, b) => a + b,
+            '−': (a, b) => a - b,
+            '×': (a, b) => a * b,
+            '÷': (a, b) => a / b,
+        };
 
-    const _addition = (obj) => {
-        let total = parseFloat(obj.userTotal) + parseFloat(obj.calcVal);
-        total = _roundNumber(total);
-        return {
-            userTotal: total,
-            calcVal: null,
-            curVal: null,
-            operand: null,
-        }
-    }
-
-    const _substract = (obj) => {
-        let total = parseFloat(obj.userTotal) - parseFloat(obj.calcVal);
-        total = _roundNumber(total);
-        return {
-            userTotal: total,
-            calcVal: null,
-            curVal: null,
-            operand: null,
-        }
+        return _result(_roundNumber(operations[symbol](left, right)));
     }
 
     const _decimal = (obj) => {
@@ -86,9 +67,9 @@ const Operation = (obj) => {
     }
 
     const _percent = (obj) => {
-        let total = obj.userTotal / 100;
+        let total = parseFloat(obj.userTotal) / 100;
         if(obj.calcVal){
-            total = obj.calcVal  / 100;
+            total = parseFloat(obj.calcVal) / 100;
        }
         return {
             userTotal: total,
@@ -143,13 +124,10 @@ const Operation = (obj) => {
             case '%':
                 return _percent(obj);
             case '÷':
-                return _division(obj);
             case '×':
-                return _muliplication(obj);
             case '−':
-                return _substract(obj);
             case '+':
-                return _addition(obj);
+                return _applyArithmetic(obj, symbol);
             default:
                 return _clear(obj);
         }
@@ -164,12 +142,10 @@ const Operation = (obj) => {
                 // Set operand as active
                 if(obj.operand){
                     if (obj.userTotal && obj.calcVal){
-                        let res = operandSwitch(obj, obj.operand);
-                        res.operand = obj.curVal;
-                        return res;
+                        const res = operandSwitch(obj, obj.operand);
+                        return { ...res, operand: obj.curVal };
                     }else{
-                        obj.operand = obj.curVal;
-                        return obj;
+                        return { ...obj, curVal: null, operand: obj.curVal };
                     }
                 }else{
                     // Set operand as active
@@ -196,8 +172,7 @@ const Operation = (obj) => {
         }else{
             // Validate if we should ignore zero
             if( (!(obj.calcVal) || obj.calcVal === 0) && obj.curVal === "0" ){
-                obj.calcVal = 0
-                return obj
+                return { ...obj, calcVal: 0, curVal: null }
             } else if(obj.operand){
                     if (obj.calcVal) {
                         calcVal =  obj.calcVal + obj.curVal;

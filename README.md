@@ -23,6 +23,26 @@ $ cd react-calculator
 $ npm test 
 ```
 
+For the same quality gates used in CI:
+
+```sh
+npm run lint
+npm run test:ci
+npm run build
+```
+
+## Architecture
+
+`App` owns the calculator state and routes key presses into the pure operation
+engine. `CalculatorKeyboard` and `CalculatorKey` emit user input, while
+`CalculatorScreen` renders the current total. The operation engine accepts and
+returns a new `{ userTotal, calcVal, curVal, operand }` state object; it does not
+mutate caller-owned state. Invalid arithmetic and division by zero produce an
+explicit `Error` display state instead of a browser alert.
+
+The CI test command disables Jest's cache so every run exercises the checked
+out source. The production build is also compiled on every pull request.
+
 
 ## Contributing
 
@@ -39,12 +59,15 @@ Or open up [an issue](https://github.com/gusreyes01/react-calculator/issues).
 
 ## Contributors
 
-[<img src="https://avatars0.githubusercontent.com/u/2120129?v=4" width="100px;"/><br /><sub><b>Gustavo Reyes</b></sub>](https://github.com/gusreyes01)<br />[💬](#question-gusreyes01 "Answering Questions") [💻](https://github.com/gusreyes91/react-calculator/commits?author=gusreyes01 "Code") 
+[<img src="https://avatars0.githubusercontent.com/u/2120129?v=4" width="100px;"/><br /><sub><b>Gustavo Reyes</b></sub>](https://github.com/gusreyes01)<br />[💬](#question-gusreyes01 "Answering Questions") [💻](https://github.com/gusreyes01/react-calculator/commits?author=gusreyes01 "Code") 
 
 
 ## Discussion and Collaboration
 
-In addition to the [Github Issues](https://github.com/alluximx/react-calculator/issues) page
+Use the [GitHub Issues](https://github.com/gusreyes01/react-calculator/issues)
+page for reproducible bugs and feature proposals. See
+[CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request and
+[SECURITY.md](SECURITY.md) for private vulnerability reports.
 
 ## License
 

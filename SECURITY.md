@@ -1,21 +1,17 @@
-# Security Policy
+# Security policy
 
-## Supported Versions
+## Supported version
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Security fixes are maintained on the latest `0.1.x` release. The calculator is
+a client-only application: it does not store credentials, transmit user input,
+or provide a server-side API.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+## Reporting a vulnerability
 
-## Reporting a Vulnerability
+Use GitHub's **Security** tab and choose **Report a vulnerability**. Include the
+affected browser, the input sequence, the observed impact, and a minimal
+reproduction. Do not publish an unpatched vulnerability in an issue.
 
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Reports are acknowledged within five business days. Valid issues are fixed on
+a private branch, covered by a regression test, and disclosed with the release
+that contains the fix.

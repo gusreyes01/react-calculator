@@ -5,11 +5,10 @@ import CalculatorScreen from '../Calculator/CalculatorScreen';
 import Operation from '../operations';
 
 function App() {
-  let [obj, setObj] = useState({calcVal: null, userTotal: 0, curVal: null, operand: null});
+  const [obj, setObj] = useState({calcVal: null, userTotal: 0, curVal: null, operand: null});
 
   const onClick = (val) => {
-    obj.curVal = val;
-    const op = Operation(obj);
+    const op = Operation({ ...obj, curVal: val });
     setObj(op.calculate);
   }
 
